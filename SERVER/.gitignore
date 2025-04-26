@@ -1,0 +1,5 @@
+.env
+mode_modules
+.vscode
+.DS_store
+/node_modules/

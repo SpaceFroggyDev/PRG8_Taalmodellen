@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&family=Pangolin&display=swap');
+
+body {
+    background-color: #d8ceb8;
+    background-image: url("./img/forest.jpg");
+    background-size: cover;
+
+    font-family: "Pangolin", cursive;
+    font-weight: 400;
+    font-style: normal;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1,h2,h3,h4,h5,h6,button,span {
+    font-family: "Grenze Gotisch", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+#human {
+    margin: 1vw;
+}
+
+input {
+    font-family: "Pangolin", cursive;
+    font-weight: 400;
+    font-style: normal;
+
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid #000000;
+    border-radius: 2vw;
+    padding: 1vw 2vw;
+    width: 63vw;
+}
+
+button {
+    padding: 1vw 2vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid #000000;
+    border-radius: 2vw;
+    color: #ffffff;
+}
+
+#ai {
+    margin: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ai img {
+    width: 30vw;
+    height: auto;
+}
+
+#ai div {
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid #000000;
+    border-radius: 2vw;
+    padding: 1vw 2vw;
+    width: 70vw;
+}
+
+#ai span {
+    color: #a89ff8;
+    font-size: 1.5vw;
+}
