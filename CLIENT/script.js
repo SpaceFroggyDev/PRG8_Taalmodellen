@@ -23,8 +23,7 @@ btn.addEventListener("click", async (event) => {
             method: "POST",
             mode: "cors",
             headers: { "Content-Type": "application/json" },
-            // body: JSON.stringify({ messages: messages }),
-            body: JSON.stringify({ prompt }),
+            body: JSON.stringify({ messages }),
         });
 
         if (response.ok) {

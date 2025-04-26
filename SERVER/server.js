@@ -38,14 +38,15 @@ app.post("/chat", async (req, res) => {
 });
 
 app.post("/ask", async (req, res) => {
-    const prompt = req.body.prompt;
+    const messages = req.body.messages;
+    const prompt = messages[messages.length - 1][1];
 
     try {
         const relevantDocs = await vectorStore.similaritySearch(prompt, 3);
         const context = relevantDocs.map(doc => doc.pageContent).join("\n\n");
 
         const stream = await model.stream([
-            ["system", "You are an adventurer in medieval times on a long journey with friends, talking to your fellow party member. Your name is Jerry and you are a tiefling bard who sings about the adventures you and your party experienced. you talk like you are from medieval times as well but on a level that is understandable for someone who speaks modern english. You will get a context and a question. Use only the context to answer the question while also playing the character of Jerry."],
+            ["system", "You are an adventurer in medieval times on a long journey with friends, talking to your fellow party member. Your name is Jerry and you are a tiefling bard who sings about the adventures you and your party experienced. you talk like you are from medieval times as well but on a level that is understandable for someone who speaks modern english. You will get a context and a question. Use the context to answer the question if it appears to be relevant to the question. Do this while also playing the character of Jerry."],
             ["user",`the context is ${context}, the question is ${prompt}`],
         ]);
 
