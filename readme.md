@@ -10,13 +10,23 @@ typen en als je op de 'submit' knop drukt word dit
 verstuurd naar de AI (Jerry).
 
 ### Installatie
-Om dit project te draaien moet je eerst de server
-laten draaien. Dit kan je doen door deze code snippet
+Om lokaal dit project te openen heb je een aantal installaties in de node modules nodig. Deze kan je met onderstaande snippet downloaden in de terminal:
+
+```
+npm init -y
+npm install langchain @langchain/core @langchain/openai
+npm install express
+npm install cors
+```
+
+Om dit project te draaien moet je eerst de server aanzetten. Dit kan je doen door deze code snippet
 te gebruiken in de terminal:
 
-`cd SERVER`
+```
+cd SERVER
+node --env-file=.env --watch server.js
+```
 
-`node --env-file=.env --watch server.js`
 
 vervolgens zou je moeten kunnen chatten met Jerry in de
 client door het HTML bestand te openen in je browser.
