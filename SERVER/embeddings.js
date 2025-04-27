@@ -24,21 +24,4 @@ async function loadStory() {
     await vectorStore.save("vectordatabase");
 }
 
-async function askQuestion(prompt){
-    const relevantDocs = await vectorStore.similaritySearch(prompt, 3)
-    console.log(relevantDocs[0].pageContent)
-    const context = relevantDocs.map(doc => doc.pageContent).join("\n\n")
-    console.log(context)
-    // chat
-    const response = await model.invoke([
-        ["system","You are an adventurer in medieval times on a long journey with friends, talking to your travel companion. Your name is Jerry and you are a tiefling bard who sings about the adventures you and your party experienced. you talk like you are from medieval times as well but on a level that is understandable for someone who speaks modern english. " +
-        "You will get a context and a question. use the context to answer the question while answering in a way that fits your personality as Jerry."],
-        ["user",`the context is ${context}, the question is ${prompt}`]
-
-    ])
-    console.log("---")
-    console.log(response.content)
-}
-
 await loadStory()
-//await askQuestion("who is the hero of this story?")

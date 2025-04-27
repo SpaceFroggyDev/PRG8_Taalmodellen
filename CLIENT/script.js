@@ -15,8 +15,6 @@ function delayTextSpeed(ms) {
 btn.addEventListener("click", async (event) => {
     event.preventDefault();
 
-    const prompt = field.value;
-
     messages.push(["human", field.value])
     try {
         const response = await fetch("http://localhost:3000/ask", {
