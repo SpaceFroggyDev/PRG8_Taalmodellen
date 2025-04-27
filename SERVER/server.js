@@ -19,11 +19,6 @@ const embeddings = new AzureOpenAIEmbeddings({
 
 let vectorStore = await FaissStore.load("./vectordatabase", embeddings);
 
-async function sendPrompt(messages){
-    const result = await model.invoke(messages)
-    return result.content
-}
-
 app.post("/chat", async (req, res) => {
     const messages = req.body.messages;
 
@@ -39,16 +34,21 @@ app.post("/chat", async (req, res) => {
 
 app.post("/ask", async (req, res) => {
     const messages = req.body.messages;
-    const prompt = messages[messages.length - 1][1];
 
     try {
+        const prompt = messages[messages.length - 1][1];
         const relevantDocs = await vectorStore.similaritySearch(prompt, 3);
         const context = relevantDocs.map(doc => doc.pageContent).join("\n\n");
+        
+        messages.push(
+            [
+                "system",
+                "You are an adventurer in medieval times on a long journey with friends, talking to your fellow party member. Your name is Jerry and you are a tiefling bard who sings about the adventures you and your party experienced. You talk like you are from medieval times as well but on a level that is understandable for someone who speaks modern English. Use the context to answer the question if it appears to be relevant to the question. Do this while also playing the character of Jerry."
+            ],
+            ["user", `The context is: ${context}. The question is: ${prompt}`]
+        );
 
-        const stream = await model.stream([
-            ["system", "You are an adventurer in medieval times on a long journey with friends, talking to your fellow party member. Your name is Jerry and you are a tiefling bard who sings about the adventures you and your party experienced. you talk like you are from medieval times as well but on a level that is understandable for someone who speaks modern english. You will get a context and a question. Use the context to answer the question if it appears to be relevant to the question. Do this while also playing the character of Jerry."],
-            ["user",`the context is ${context}, the question is ${prompt}`],
-        ]);
+        const stream = await model.stream(messages);
 
         res.setHeader("Content-Type", "text/plain");
 
