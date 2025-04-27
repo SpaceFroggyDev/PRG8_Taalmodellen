@@ -19,19 +19,6 @@ const embeddings = new AzureOpenAIEmbeddings({
 
 let vectorStore = await FaissStore.load("./vectordatabase", embeddings);
 
-app.post("/chat", async (req, res) => {
-    const messages = req.body.messages;
-
-    res.setHeader("Content-Type", "text/plain");
-
-    const stream = await model.stream(messages);
-    for await (const chunk of stream) {
-        console.log(chunk.content);
-        res.write(chunk.content);
-    }
-    res.end();
-});
-
 app.post("/ask", async (req, res) => {
     const messages = req.body.messages;
 
@@ -56,6 +43,7 @@ app.post("/ask", async (req, res) => {
             res.write(chunk.content);
         }
         res.end();
+
     } catch (error) {
         console.error("Error in /ask endpoint:", error.message);
         res.status(500).send("Failed to process the question.");
