@@ -14,6 +14,7 @@ function delayTextSpeed(ms) {
 
 btn.addEventListener("click", async (event) => {
     event.preventDefault();
+    btn.disabled = true;
 
     messages.push(["human", field.value])
     try {
@@ -40,6 +41,7 @@ btn.addEventListener("click", async (event) => {
                 await delayTextSpeed(150);
             }
 
+            btn.disabled = false;
             messages.push(["ai", output.innerText]);
             localStorage.setItem("chatHistory", JSON.stringify(messages));
         } else {

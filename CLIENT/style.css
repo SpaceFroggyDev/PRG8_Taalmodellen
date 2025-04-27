@@ -45,6 +45,13 @@ button {
     color: #ffffff;
 }
 
+button:disabled {
+    background-color: rgba(255, 0, 0, 0.36);
+    color: #888888;
+    border-color: #555555;
+    cursor: not-allowed;
+}
+
 #ai {
     margin: 1vw;
     display: flex;

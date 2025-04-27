@@ -23,4 +23,5 @@ client door het HTML bestand te openen in je browser.
 
 ### Chat History
 De chat history word lokaal bijgehouden in de browser. Je kan
-je chathistory terugzien of verwijderen in localstorage (CTRL + SHIFT + I → application → localstorage).
+je chathistory terugzien of verwijderen in localstorage
+(CTRL + SHIFT + I → application → localstorage).
