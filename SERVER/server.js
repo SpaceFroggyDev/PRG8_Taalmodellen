@@ -8,9 +8,16 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const model = new AzureChatOpenAI({
-    temperature: 0.2
-})
+import { ChatOpenAI } from "@langchain/openai";
+
+const model = new ChatOpenAI({
+    configuration: {
+        baseURL: "https://router.huggingface.co/novita/v3/openai",
+        apiKey: process.env.HUGGINGFACE_KEY,
+    },
+    modelName: "deepseek/deepseek-v3-0324",
+    maxTokens: 500,
+});
 
 const embeddings = new AzureOpenAIEmbeddings({
     temperature: 0.5,
